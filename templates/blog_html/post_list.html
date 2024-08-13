@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список постів</title>
+</head>
+<body>
+    <h2> Пости </h2>
+
+    <form method="get" action="{% url 'search_posts_by_author_name' %}">
+        <label for="author_name">Пошук постів за ім'ям автора:</label>
+        <input type="text" id="author_name" name="author_name" value="{{ query }}">
+        <button type="submit">Шукати</button>
+    </form>
+
+    <ul>
+        {% for post in posts_list %}
+
+            <li>
+                {{post.title}} - {{post.published_date}}
+                <a href="{% url 'post_details' post.id %}">Детальніше</a>
+            </li>
+
+        {% endfor %}
+
+    </ul>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Пошук постів</title>
+</head>
+<body>
+    <h1>Результати пошуку</h1>
+
+    <form method="get" action="{% url 'search_posts_by_author_name' %}">
+        <label for="author_name">Пошук постів за ім'ям автора:</label>
+        <input type="text" id="author_name" name="author_name" value="{{ query }}">
+        <button type="submit">Шукати</button>
+    </form>
+
+    {% if posts %}
+        <ul>
+            {% for post in posts %}
+                <li>
+                    {{ post.title }} - {{ post.published_date }}
+                    <a href="{% url 'post_details' post.id %}">Детальніше</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+
+        {% if query %}
+            <p>Немає постів для автора з іменем "{{ query }}".</p>
+        {% else %}
+            <p>Введіть ім'я автора для пошуку.</p>
+        {% endif %}
+    {% endif %}
+
+    <a href="{% url 'post_list' %}">На головну</a>
+</body>
+</html>

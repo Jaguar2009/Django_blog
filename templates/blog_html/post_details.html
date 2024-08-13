@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Деталі</title>
+</head>
+<body>
+
+<h2> {{post_detail.title}}</h2>
+<h2> {{post_detail.content}}</h2>
+
+<p>
+    <h3>Автор:{{post_detail.author}}</h3>
+    <h4>Дата:{{post_detail.published_date}}</h4>
+
+</p>
+<h4>Коментарі</h4>
+{% for comment in post_detail_comment %}
+
+    <li>
+        {{comment.author_name}} - {{comment.created_date}}
+        <p>
+            {{comment.text}}
+        </p>
+    </li>
+
+{% empty %}
+        <li>Поки що коментарів немає.</li>
+{% endfor %}
+
+</body>
+</html>
